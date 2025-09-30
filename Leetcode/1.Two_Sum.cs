@@ -1,14 +1,14 @@
 public class Solution {
     public int[] TwoSum(int[] nums, int target) {
         // Brute force method in C#
-        for (int i = 0; i < nums.Count(); i++) {
-            for (int j = 0; j < nums.Count() && i != j; j++) {
-                if (nums[i] + nums[j] == target) {
-                    return [i, j];
-                }
-            }
-        }
-        return [-1, -1];
+        // for (int i = 0; i < nums.Count(); i++) {
+        //     for (int j = 0; j < nums.Count() && i != j; j++) {
+        //         if (nums[i] + nums[j] == target) {
+        //             return [i, j];
+        //         }
+        //     }
+        // }
+        // return [-1, -1];
 
         // O(nlogn)
         // int i = 0;
@@ -55,5 +55,17 @@ public class Solution {
         //     }
         // }
         // return [0];
+
+        var dict = new Dictionary<int, int>();
+        dict.Add(target - nums[0], 0);
+        for(int i = 1; i < nums.Length; i++){
+            var complement = target - nums[i];
+            if(dict.ContainsKey(nums[i])){
+                return [i, dict[nums[i]]];
+            }
+            dict[complement] = i;
+        }
+
+        return null;
     }
 }
